@@ -28,8 +28,8 @@ func countIncreases(depths []int) int {
 
 func get3WindowSum(ints []int) []int {
 	sums := make([]int, 0)
-	for i := 0; i < len(ints) - 2; i++ {
-		sums = append(sums, ints[i] + ints[i+ 1] + ints[i + 2])
+	for i := 0; i < len(ints)-2; i++ {
+		sums = append(sums, ints[i]+ints[i+1]+ints[i+2])
 	}
 	return sums
 }

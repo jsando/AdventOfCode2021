@@ -24,13 +24,13 @@ func Test_CountIncreases(t *testing.T) {
 }
 
 func Test_3Window(t *testing.T) {
-	if !reflect.DeepEqual(get3WindowSum([]int{}),[]int{}) {
+	if !reflect.DeepEqual(get3WindowSum([]int{}), []int{}) {
 		t.Error()
 	}
-	if !reflect.DeepEqual(get3WindowSum([]int{1, 2, 3}),[]int{6}) {
+	if !reflect.DeepEqual(get3WindowSum([]int{1, 2, 3}), []int{6}) {
 		t.Error()
 	}
-	if !reflect.DeepEqual(get3WindowSum([]int{1, 2, 3, 4}),[]int{6, 9}) {
+	if !reflect.DeepEqual(get3WindowSum([]int{1, 2, 3, 4}), []int{6, 9}) {
 		t.Error()
 	}
 }

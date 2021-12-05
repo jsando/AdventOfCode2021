@@ -19,3 +19,14 @@ BUT ... part2 changes the rules.  If I'd done a simple function for part1, I can
 But hey ... I've got unit tests so I can always refactor ;) I won't do much though just so I can read this journal and see the state of the code later on.
 
 Done with day 2 ... feels like I'm writing a lot more code than is warranted for simple problems with the unit tests in there, but I will stick with it.  
+
+# Day 3 
+
+Uh ... gosh this strict TDD thing is really hard.  When I see other people do it, they seem to magically find a simple, incremental test without thinking through the entire problem and then through the series of little increments at some point magically announce "and that's the final solution!".  I can't even IMAGINE what to test without thinking of the overall solution?  Maybe its BS?  Maybe they have just practiced the same "fizz buzz" code dojo so many times they already know the "simple incremental tests" that lead to the final solution?
+
+Side note ... I somehow had Go amd64 installed on my arm64 mac???  No idea how I did that and failed to notice it.  Had to wipe it out and reinstall Go and all my ~/go/bin stuff.
+
+My solution is really bugging me ... there's gotta be a bitwise op to do this versus using an array of counters?
+
+I went back and rewrote into a simple to read function, and ended up making lots of smaller tests ... and the overall coverage is 85%.  Just the error handling paths isn't being tested.  
+

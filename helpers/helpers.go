@@ -56,3 +56,20 @@ func AbsInt(v int) int {
 	}
 	return v
 }
+
+func StringToIntSlice(text string, sep string) []int {
+	values := make([]int, 0)
+	text = strings.TrimSpace(text)
+	for _, s := range strings.Split(text, sep) {
+		s = strings.TrimSpace(s)
+		if len(s) == 0 {
+			continue
+		}
+		val, err := strconv.Atoi(s)
+		if err != nil {
+			panic(err)
+		}
+		values = append(values, val)
+	}
+	return values
+}

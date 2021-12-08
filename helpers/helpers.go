@@ -73,3 +73,18 @@ func StringToIntSlice(text string, sep string) []int {
 	}
 	return values
 }
+
+func MinMaxIntSlice(s []int) (min, max int) {
+	if len(s) == 0 {
+		panic("empty slice!")
+	}
+	for i, v := range s {
+		if i == 0 || v < min {
+			min = v
+		}
+		if i == 0 || v > max {
+			max = v
+		}
+	}
+	return
+}

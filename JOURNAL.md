@@ -38,3 +38,9 @@ Its kind of natural to take the example straight from the puzzle and make that t
 
 Still struggling to figure out incremental tests to derive the solution without a plan up-front.  Prob because my brain is thinking of the solution up front.  I am doing better with tests though, last several days have 90% coverage and I'm not even trying for coverage.  
 
+# Day 7
+
+Same.
+
+Although with the unit tests I'm writing way more code than I would normally for this type of thing, its not really taking me that much longer to complete the puzzles.
+

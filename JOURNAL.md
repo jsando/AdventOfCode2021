@@ -30,3 +30,11 @@ My solution is really bugging me ... there's gotta be a bitwise op to do this ve
 
 I went back and rewrote into a simple to read function, and ended up making lots of smaller tests ... and the overall coverage is 85%.  Just the error handling paths isn't being tested.  
 
+# Day 4 / day 5
+
+Its kind of natural to take the example straight from the puzzle and make that the unit test ... which is what I lazily did in day 5.  But that's not really using test driven design right?  That's the high-level test, but there should be a series of smaller tests along the way.  Like the first test should just be can I represent the grid, and then plot points, and then check counts, or whatever.  Little steps like that.  I find myself coding the big picture test and then writing code for 15-20 minutes to make it pass ... TDD is supposed to be very short red/green/refactor cycles.  So, I guess i'm still doing it wrong.  Still trying.
+
+# Day 6
+
+Still struggling to figure out incremental tests to derive the solution without a plan up-front.  Prob because my brain is thinking of the solution up front.  I am doing better with tests though, last several days have 90% coverage and I'm not even trying for coverage.  
+

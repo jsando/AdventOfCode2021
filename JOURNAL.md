@@ -47,3 +47,10 @@ Although with the unit tests I'm writing way more code than I would normally for
 # Day 8
 
 OMG I got so stuck on part 2 and TDD was somewhat part of my problem.  Also I was waffling about how to represent segments in the display.  Got focused finally and re-read the problem and finally realized I was hella overthinking it, and approching it all wrong.  Once I had the right approach, the TDD flowed naturally.  I ended up having to write out the algorithm in pseudocode.  TDD was supposed to make it so I didn't have to think it through up front.
+
+# Day 9
+
+Just realized that in doing TDD in Go, I wish I could put the TestXXX function in the same source file as the function itself (ie, solution.go instead of solution_test.go).  In doing strict TDD I write the test function first, then create the functions its calling and that is easiest if I let VSCode create it in the same source file (solution_test.go).  I make the test pass, and then have to manualy move the function over to solution.go.  Would be nice if I could just put the Test functions in the solution.go file :) 
+
+I realize I am doing more test driven design as I go along, and I mean that in the sense of "discovering" the solution along the way.  I haven't been going back to clean this up but realize now that I'm using some "pathfinder" tests to help discover the solution ... in prod code I would def go back and clean that up.  As well as looking at overall coverage, and fuzzing, and ... and ... and.
+

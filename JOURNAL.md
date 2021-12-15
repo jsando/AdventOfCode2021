@@ -44,3 +44,6 @@ Same.
 
 Although with the unit tests I'm writing way more code than I would normally for this type of thing, its not really taking me that much longer to complete the puzzles.
 
+# Day 8
+
+OMG I got so stuck on part 2 and TDD was somewhat part of my problem.  Also I was waffling about how to represent segments in the display.  Got focused finally and re-read the problem and finally realized I was hella overthinking it, and approching it all wrong.  Once I had the right approach, the TDD flowed naturally.  I ended up having to write out the algorithm in pseudocode.  TDD was supposed to make it so I didn't have to think it through up front.

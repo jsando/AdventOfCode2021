@@ -54,3 +54,21 @@ Just realized that in doing TDD in Go, I wish I could put the TestXXX function i
 
 I realize I am doing more test driven design as I go along, and I mean that in the sense of "discovering" the solution along the way.  I haven't been going back to clean this up but realize now that I'm using some "pathfinder" tests to help discover the solution ... in prod code I would def go back and clean that up.  As well as looking at overall coverage, and fuzzing, and ... and ... and.
 
+# Day 12-13 ... a month later!
+
+It's now January 17th!  I got sidetracked by the holidays, then struggled to jump back into day 12.  The struggle was in large part TDD ... the problem was obviously easily solveable with a simple recursive function, but I really struggled to derive it via TDD.  I got there finally though but dang ... it was beating me up.
+
+Day 12 part 2, and day 13 went pretty quick.
+
+I'm mostly been using GoConvey, so all the tests run on every save and it gives me a toast popup with the results within a second.  It sometimes gets lost and I have to restart GoConvey but it mostly works.
+
+I'm writing more code with TDD than I would otherwise, and I don't just mean the unit tests, I mean the overall solution seems like it has more code.  I'm more likely to introduce a struct for example to make it easier to test some things.  If I was doing an actual competition I'd be hammering stright into the solution as quick as possible and not wasting time with TDD.  
+
+Of course, actual *production* code needs maintainability a gagillion times more than it needs some random algorithm implemented in as big a rush as you can.
+
+My code so far is NOT production code, maybe I'm being a bit split-minded here ... though I'm doing TDD, I'm also taking shortcuts for AOC such as hard-coding limits of arrays, or panicking if an i/o returns an error.  And I'm not refactoring my solution once I get it working.  But my goal this year was to practice the TDD part, and I am for sure achieving that.
+
+# Day 14
+
+The unit tests I created were not the ones I ended with, as the solution evolved.  But that's ok, it got me there.
+

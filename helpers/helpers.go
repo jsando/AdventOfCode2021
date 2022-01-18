@@ -1,20 +1,10 @@
 package helpers
 
 import (
-	"bufio"
 	"io/ioutil"
-	"os"
 	"strconv"
 	"strings"
 )
-
-func NewScanner(inputPath string) *bufio.Scanner {
-	f, err := os.Open(inputPath)
-	if err != nil {
-		panic(err)
-	}
-	return bufio.NewScanner(f)
-}
 
 func TextToIntSlice(text string) []int {
 	ints := []int{}

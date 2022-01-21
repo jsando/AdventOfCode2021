@@ -1,25 +1,21 @@
 package day15
 
 import (
-	"image"
 	"testing"
 )
 
 func TestExample(t *testing.T) {
 	grid := NewGridFromFile("example-input.txt")
-	if grid.Width() != 10 {
-		t.Errorf("expected width of 10, got %d", grid.Width())
+	if grid.Size() != 10 {
+		t.Errorf("expected size of 10, got %d", grid.Size())
 	}
-	if grid.Height() != 10 {
-		t.Errorf("expected height of 10, got %d", grid.Height())
-	}
-	if grid.CostOf(image.Point{0, 0}) != 1 {
+	if grid.Get(0, 0) != 1 {
 		t.Errorf("wrong value")
 	}
-	if grid.CostOf(image.Point{1, 1}) != 3 {
+	if grid.Get(1, 1) != 3 {
 		t.Errorf("wrong value")
 	}
-	if grid.CostOf(image.Point{9, 9}) != 1 {
+	if grid.Get(9, 9) != 1 {
 		t.Errorf("wrong value")
 	}
 }

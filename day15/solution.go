@@ -9,8 +9,8 @@ import (
 )
 
 func Run(inputpath string) {
-	fmt.Printf("Part 1: %d\n", part1(inputpath)) // 578 too low, added only right/down constraint and now 583 is correct
-	fmt.Printf("Part 2: %d\n", part2(inputpath)) // 2934 too high (WTF!), re-enabled up/left and now get 2927
+	fmt.Printf("Part 1: %d\n", part1(inputpath))
+	fmt.Printf("Part 2: %d\n", part2(inputpath))
 }
 
 func part1(inputpath string) int {

@@ -9,12 +9,21 @@ import (
 
 func Run(inputpath string) {
 	fmt.Printf("Part 1: %d\n", part1(inputpath)) // 578 too low, added only right/down constraint and now 583 is correct
+	fmt.Printf("Part 2: %d\n", part2(inputpath)) // 2934 too high (WTF!), re-enabled up/left and now get 2927
 }
 
 func part1(inputpath string) int {
 	grid := NewGridFromFile(inputpath)
 	path := grid.Path(image.Point{X: 0, Y: 0}, image.Point{X: grid.Width() - 1, Y: grid.Height() - 1})
-	grid.PrintPath(path)
+	//grid.PrintPath(path)
+	return grid.PathCost(path)
+}
+
+func part2(inputpath string) int {
+	grid := NewGridFromFile(inputpath)
+	grid.SuperSize()
+	path := grid.Path(image.Point{X: 0, Y: 0}, image.Point{X: grid.Width() - 1, Y: grid.Height() - 1})
+	//grid.PrintPath(path)
 	return grid.PathCost(path)
 }
 
@@ -96,15 +105,15 @@ func heuristic(p1, p2 image.Point) int {
 
 func (r *RiskMap) Neighbors(p image.Point) []image.Point {
 	n := make([]image.Point, 0, 4)
-	//if p.X > 0 {
-	//	n = append(n, image.Point{X: p.X - 1, Y: p.Y})
-	//}
+	if p.X > 0 {
+		n = append(n, image.Point{X: p.X - 1, Y: p.Y})
+	}
 	if p.X < r.Width()-1 {
 		n = append(n, image.Point{X: p.X + 1, Y: p.Y})
 	}
-	//if p.Y > 0 {
-	//	n = append(n, image.Point{X: p.X, Y: p.Y - 1})
-	//}
+	if p.Y > 0 {
+		n = append(n, image.Point{X: p.X, Y: p.Y - 1})
+	}
 	if p.Y < r.Height()-1 {
 		n = append(n, image.Point{X: p.X, Y: p.Y + 1})
 	}
@@ -137,6 +146,30 @@ func (r *RiskMap) PrintPath(path []image.Point) {
 
 func (r *RiskMap) CostOf(point image.Point) int {
 	return int(r.grid[point.Y][point.X] - '0')
+}
+
+// SuperSize expands the map by 5x in both directions as per part2 of the puzzle.
+func (r *RiskMap) SuperSize() {
+	getValue := func(x, y int) rune {
+		distance := y/r.Height() + x/r.Width()
+		baseX := x % r.Width()
+		baseY := y % r.Height()
+		value := int(r.grid[baseY][baseX]-'0') + distance
+		if value > 9 { // 10 -> 1, 11 -> 2, 12 -> 3
+			value = value%10 + 1
+		}
+		return rune(value + '0')
+	}
+	height := r.Height() * 5
+	width := r.Width() * 5
+	grid := make([][]rune, height)
+	for y := 0; y < height; y++ {
+		grid[y] = make([]rune, width)
+		for x := 0; x < width; x++ {
+			grid[y][x] = getValue(x, y)
+		}
+	}
+	r.grid = grid
 }
 
 // Copy-paste from Go standard library example for 'heap'.

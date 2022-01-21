@@ -30,3 +30,10 @@ func TestPart1(t *testing.T) {
 		t.Errorf("expected cost of 40, got %d", cost)
 	}
 }
+
+func TestPart2(t *testing.T) {
+	cost := part2("example-input.txt")
+	if cost != 315 {
+		t.Errorf("expected cost of 315, got %d", cost)
+	}
+}

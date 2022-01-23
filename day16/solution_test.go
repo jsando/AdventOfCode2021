@@ -99,3 +99,37 @@ func TestPart1(t *testing.T) {
 		t.Errorf("expected 31, got %d", value)
 	}
 }
+
+func TestExecutePacket(t *testing.T) {
+	tests := []struct {
+		input string
+		value int
+	}{
+		{input: "C200B40A82", value: 3},                 // sum
+		{input: "04005AC33890", value: 54},              // product
+		{input: "880086C3E88112", value: 7},             // minimum
+		{input: "CE00C43D881120", value: 9},             // maximum
+		{input: "D8005AC2A8F0", value: 1},               // <
+		{input: "F600BC2D8F", value: 0},                 // >
+		{input: "9C005AC2F8F0", value: 0},               // =
+		{input: "9C0141080250320F1802104A08", value: 1}, // = (with subexpressions)
+	}
+	for _, test := range tests {
+		reader := NewPacketReader(strings.NewReader(test.input))
+		packet, err := reader.ReadPacket()
+		if err != nil {
+			t.Error(err)
+		}
+		got := packet.Execute()
+		if got != test.value {
+			t.Errorf("for input %s, got %d expected %d", test.input, got, test.value)
+		}
+	}
+}
+
+func TestPart2(t *testing.T) {
+	value := part2("example-input.txt")
+	if value != 54 {
+		t.Errorf("expected 54, got %d", value)
+	}
+}

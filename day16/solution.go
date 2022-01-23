@@ -9,6 +9,7 @@ import (
 
 func Run(inputPath string) {
 	fmt.Printf("Part 1: %d\n", part1(inputPath))
+	fmt.Printf("Part 2: %d\n", part2(inputPath))
 }
 
 func part1(inputPath string) int {
@@ -24,6 +25,19 @@ func part1(inputPath string) int {
 	return packet.SumVersion()
 }
 
+func part2(inputPath string) int {
+	file, err := os.Open(inputPath)
+	if err != nil {
+		panic(err)
+	}
+	reader := NewPacketReader(file)
+	packet, err := reader.ReadPacket()
+	if err != nil {
+		panic(err)
+	}
+	return packet.Execute()
+}
+
 func NewPacketReader(reader io.Reader) *PacketReader {
 	return &PacketReader{
 		input: bufio.NewReader(reader),
@@ -31,7 +45,14 @@ func NewPacketReader(reader io.Reader) *PacketReader {
 }
 
 const (
-	LiteralPacketTypeID = 4
+	SumPacket         = 0
+	ProductPacket     = 1
+	MinimumPacket     = 2
+	MaximumPacket     = 3
+	LiteralPacket     = 4
+	GreaterThanPacket = 5
+	LessThanPacket    = 6
+	EqualToPacket     = 7
 )
 
 type Packet struct {
@@ -47,6 +68,60 @@ func (p Packet) SumVersion() int {
 		sum += sp.SumVersion()
 	}
 	return sum
+}
+
+func (p Packet) Execute() int {
+	value := 0
+	switch p.typeID {
+	case SumPacket:
+		for _, sp := range p.subPackets {
+			value += sp.Execute()
+		}
+	case ProductPacket:
+		value = 1
+		for _, sp := range p.subPackets {
+			value *= sp.Execute()
+		}
+	case MinimumPacket:
+		value = -1
+		for _, sp := range p.subPackets {
+			v := sp.Execute()
+			if value == -1 || v < value {
+				value = v
+			}
+		}
+	case MaximumPacket:
+		value = -1
+		for _, sp := range p.subPackets {
+			v := sp.Execute()
+			if value == -1 || v > value {
+				value = v
+			}
+		}
+	case LiteralPacket:
+		value = p.literal
+	case GreaterThanPacket:
+		v1 := p.subPackets[0].Execute()
+		v2 := p.subPackets[1].Execute()
+		if v1 > v2 {
+			value = 1
+		}
+	case LessThanPacket:
+		v1 := p.subPackets[0].Execute()
+		v2 := p.subPackets[1].Execute()
+		if v1 < v2 {
+			value = 1
+		}
+	case EqualToPacket:
+		v1 := p.subPackets[0].Execute()
+		v2 := p.subPackets[1].Execute()
+		if v1 == v2 {
+			value = 1
+		}
+	default:
+		panic(fmt.Sprintf("bad packet type id: %d", p.typeID))
+	}
+	return value
 }
 
 type PacketReader struct {
@@ -120,7 +195,7 @@ func (r *PacketReader) readPacket2(discardExtraBits bool) (Packet, error) {
 		return packet, err
 	}
 	packet.typeID = typeID
-	if packet.typeID == LiteralPacketTypeID {
+	if packet.typeID == LiteralPacket {
 		literal, err := r.readLiteral()
 		if err != nil {
 			return packet, err

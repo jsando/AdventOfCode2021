@@ -38,12 +38,6 @@ func part2(inputPath string) int {
 	return packet.Execute()
 }
 
-func NewPacketReader(reader io.Reader) *PacketReader {
-	return &PacketReader{
-		input: bufio.NewReader(reader),
-	}
-}
-
 const (
 	SumPacket         = 0
 	ProductPacket     = 1
@@ -55,6 +49,7 @@ const (
 	EqualToPacket     = 7
 )
 
+// Packet represents a parsed packet from the input and any sub-packets.
 type Packet struct {
 	version    int
 	typeID     int
@@ -62,6 +57,8 @@ type Packet struct {
 	subPackets []Packet
 }
 
+// SumVersion recursively sums the packet version field for this and all sub-packets,
+// essentially this is the answer for part 1.
 func (p Packet) SumVersion() int {
 	sum := p.version
 	for _, sp := range p.subPackets {
@@ -70,6 +67,8 @@ func (p Packet) SumVersion() int {
 	return sum
 }
 
+// Execute the operation of each packet, recursively, and return the computed value.
+// This is essentially the answer to part 2.
 func (p Packet) Execute() int {
 	value := 0
 	switch p.typeID {
@@ -124,11 +123,21 @@ func (p Packet) Execute() int {
 	return value
 }
 
+// PacketReader parses a sequence of hexadecimal characters (in ASCII) from the
+// underlying reader, and provides the ability to read N bits at a time, in order
+// to parse the packets as designed.  Ie, the version is 3 bits, the type is 3 bits, etc.
 type PacketReader struct {
 	input      *bufio.Reader
 	current    byte
 	currentBit byte
 	bitsRead   int
+}
+
+// NewPacketReader creates a packet reader reading input from the given io.Reader.
+func NewPacketReader(reader io.Reader) *PacketReader {
+	return &PacketReader{
+		input: bufio.NewReader(reader),
+	}
 }
 
 // readBits reads the next 'count' bits as an int

@@ -72,3 +72,9 @@ My code so far is NOT production code, maybe I'm being a bit split-minded here .
 
 The unit tests I created were not the ones I ended with, as the solution evolved.  But that's ok, it got me there.
 
+# Day 16
+
+I've done so many packet-parsing / virtual machine programs over the years, this was a dream day for me.  I wrote the code more production-ready than I've done the other days.  As a result of the error handling, my TDD coverage dropped to like 85%.  At first I was like "wait, every other day I've been at 96% what's going on!" and then saw it was all the "if err != nil" that I've basically omitted from prior days.  Yeah.  That makes sense.
+
+# Day 17
+
